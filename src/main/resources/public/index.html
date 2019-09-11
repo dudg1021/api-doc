@@ -1,0 +1,473 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>api-doc管理系统</title>
+    <!-- Tell the browser to be responsive to screen width -->
+    <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
+
+    <link rel="stylesheet" href="css/bootstrap.css">
+
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="css/font-awesome.css">
+    <!-- Ionicons -->
+    <link rel="stylesheet" href="css/ionicons.css">
+    <!-- Theme style -->
+    <link rel="stylesheet" href="css/AdminLTE.css">
+    <!-- AdminLTE Skins. We have chosen the skin-blue for this starter
+          page. However, you can choose any other skin. Make sure you
+          apply the skin class to the body tag so the changes take effect. -->
+    <link rel="stylesheet" href="css/skins/skin-blue.min.css">
+
+    <link rel="stylesheet" href="css/bootstrap-table.css">
+    <link rel="stylesheet" href="css/jquery.treegrid.css">
+    <link rel="stylesheet" href="css/myCommon.css">
+    <link rel="stylesheet" href="css/bootstrap-tab.css">
+    <link rel="stylesheet" href="css/info.css">
+
+    <!-- jQuery 3 -->
+    <script src="js/jquery-3.3.1.min.js"></script>
+    <!-- Bootstrap 3.3.7 -->
+    <script src="js/bootstrap.js"></script>
+    <!-- AdminLTE App -->
+    <script src="js/adminlte.js"></script>
+
+    <script src="js/bootstrap-table.js"></script>
+    <script src="js/bootstrap-table-zh-CN.js"></script>
+    <script src="js/bootstrap-table-treegrid.js"></script>
+    <script src="js/jquery.treegrid.min.js"></script>
+    <script src="js/bootstrap-tab.js"></script>
+
+
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+    <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
+    <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+    <![endif]-->
+
+    <!-- Google Font -->
+    <!--<link rel="stylesheet"-->
+          <!--href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700,300italic,400italic,600italic">-->
+
+
+
+</head>
+<!--
+BODY TAG OPTIONS:
+=================
+Apply one or more of the following classes to get the
+desired effect
+|---------------------------------------------------------|
+| SKINS         | skin-blue                               |
+|               | skin-black                              |
+|               | skin-purple                             |
+|               | skin-yellow                             |
+|               | skin-red                                |
+|               | skin-green                              |
+|---------------------------------------------------------|
+|LAYOUT OPTIONS | fixed                                   |
+|               | layout-boxed                            |
+|               | layout-top-nav                          |
+|               | sidebar-collapse                        |
+|               | sidebar-mini                            |
+|---------------------------------------------------------|
+-->
+<body class="hold-transition skin-blue sidebar-mini">
+<div class="wrapper">
+
+    <!-- Main Header -->
+    <header class="main-header">
+
+        <!-- Logo -->
+        <a href="#" class="logo">
+            <!-- mini logo for sidebar mini 50x50 pixels -->
+            <span class="logo-mini"><b>apidoc</b></span>
+            <!-- logo for regular state and mobile devices -->
+            <span class="logo-lg"><b>Welcome</b>  visit apidoc</span>
+        </a>
+
+        <!-- Header Navbar -->
+        <nav class="navbar navbar-static-top" role="navigation">
+            <!-- Sidebar toggle button-->
+            <a href="#" class="sidebar-toggle" data-toggle="push-menu" role="button">
+                <span class="sr-only">Toggle navigation</span>
+            </a>
+            <!-- Navbar Right Menu -->
+            <div class="navbar-custom-menu">
+                <ul class="nav navbar-nav">
+                    <!-- User Account Menu -->
+                    <li class="dropdown user user-menu">
+                        <!-- Menu Toggle Button -->
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                            <!-- The user img in the navbar-->
+                            <img src="img/1.png" class="user-image" alt="User Image">
+                            <!-- hidden-xs hides the username on small devices so only the img appears. -->
+                            <span class="hidden-xs">hello world</span>
+                        </a>
+                        <ul class="dropdown-menu">
+                            <!-- The user img in the menu -->
+                            <li class="user-header">
+                                <img src="img/1.png" class="img-circle" alt="User Image">
+
+                                <p>
+                                    helloworld - Web Developer
+                                    <small>Member since Nov. 2018</small>
+                                </p>
+                            </li>
+                            <!-- Menu Body -->
+                            <li class="user-body">
+                                <div class="row">
+                                    <div class="col-xs-4 text-center">
+                                        <a href="#">Followers</a>
+                                    </div>
+                                    <div class="col-xs-4 text-center">
+                                        <a href="#">Sales</a>
+                                    </div>
+                                    <div class="col-xs-4 text-center">
+                                        <a href="#">Friends</a>
+                                    </div>
+                                </div>
+                                <!-- /.row -->
+                            </li>
+                            <!-- Menu Footer-->
+                            <li class="user-footer">
+                                <div class="pull-left">
+                                    <a href="#" class="btn btn-default btn-flat">Profile</a>
+                                </div>
+                                <div class="pull-right">
+                                    <a href="#" class="btn btn-default btn-flat">Sign out</a>
+                                </div>
+                            </li>
+                        </ul>
+                    </li>
+                    <!-- Control Sidebar Toggle Button -->
+                    <li>
+                        <a href="#" data-toggle="control-sidebar"><i class="fa fa-gears"></i></a>
+                    </li>
+                </ul>
+            </div>
+        </nav>
+    </header>
+    <!-- Left side column. contains the logo and sidebar -->
+    <aside class="main-sidebar">
+
+        <!-- sidebar: style can be found in sidebar.less -->
+        <section class="sidebar">
+
+            <!-- Sidebar user panel (optional) -->
+            <div class="user-panel">
+                <div class="pull-left image">
+                    <img src="img/1.png" class="img-circle" alt="User Image">
+                </div>
+                <div class="pull-left info">
+                    <p>hello world</p>
+                    <!-- Status -->
+                    <a href="#"><i class="fa fa-circle text-success"></i> Online</a>
+                </div>
+            </div>
+
+            <!-- search form (Optional) -->
+            <form action="#" method="get" class="sidebar-form">
+                <div class="input-group">
+                    <input type="text" name="q" class="form-control" placeholder="Search...">
+                    <span class="input-group-btn">
+              <button type="submit" name="search" id="search-btn" class="btn btn-flat"><i class="fa fa-search"></i>
+              </button>
+            </span>
+                </div>
+            </form>
+            <!-- /.search form -->
+
+            <!-- Sidebar Menu -->
+            <ul class="sidebar-menu" data-widget="tree">
+                <li class="header"><span class="fa-lg">系统菜单</span></li>
+                <!-- Optionally, you can add icons to the links -->
+                <!--<li class="treeview">-->
+                    <!--<a href="#"><i class="fa fa-link"></i> <span>系统管理</span>-->
+                        <!--<span class="pull-right-container">-->
+                            <!--<i class="fa fa-angle-left pull-right"></i>-->
+                         <!--</span>-->
+                    <!--</a>-->
+                    <!--<ul class="treeview-menu">-->
+                        <!--<li><a href="javascript:void(0)" class="myLeftMenu" data-id="m1" data="userList.html">用户管理</a></li>-->
+                        <!--<li><a href="javascript:void(0)" class="myLeftMenu" data-id="m2" data="html/roleList3.html">角色管理</a></li>-->
+                    <!--</ul>-->
+                <!--</li>-->
+            </ul>
+            <!-- /.sidebar-menu -->
+        </section>
+        <!-- /.sidebar -->
+    </aside>
+
+    <!-- Content Wrapper. Contains page content -->
+    <div class="content-wrapper">
+        <!-- Main content -->
+        <section class="content container-fluid">
+            <div id="container">
+            </div>
+            <article class="" style="padding:20px; border-radius:10px;">
+                <!--<blockquote>-->
+                    <!--<ul>-->
+                        <!--<li><a href="" target="_blank" rel="nofollow">ApiDoc官方文档</a></li>-->
+                    <!--</ul>-->
+                <!--</blockquote>-->
+                <!--<h2>接口标题</h2>-->
+                <p><strong>接口方法：</strong><br/><br/><span id="apiurl"></span></p>
+                <p><strong>接口描述：</strong><br/><br/><span id="apidesc"></span></p>
+                <p><strong>请求参数：</strong></p>
+                <table>
+                    <tr>
+                        <th>名称</th>
+                        <th>类型</th>
+                        <th>必填</th>
+                        <th>说明</th>
+                    </tr>
+                    <tbody id="apiparam"></tbody>
+                </table>
+                <p><strong>返回参数：</strong></p>
+                <table>
+                    <tr>
+                        <th>名称</th>
+                        <th>类型</th>
+                        <th>必填</th>
+                        <th>说明</th>
+                    </tr>
+                    <tbody id="apireturn"></tbody>
+                </table>
+
+                <p><strong>请求参数示例：</strong></p>
+                <pre>
+                    <code id="reqparams">hello world</code>
+                </pre>
+                <p><strong>返回参数示例：</strong></p>
+                <pre>
+                    <code id="resparams">hello world</code>
+                </pre>
+            </article>
+            <!--------------------------
+              | Your Page Content Here |
+              -------------------------->
+
+        </section>
+        <!-- /.content -->
+    </div>
+    <!-- /.content-wrapper -->
+
+    <!-- Main Footer -->
+    <!--<footer class="main-footer">-->
+        <!--&lt;!&ndash; To the right &ndash;&gt;-->
+        <!--<div class="pull-right hidden-xs">-->
+            <!--Anything you want-->
+        <!--</div>-->
+        <!--&lt;!&ndash; Default to the left &ndash;&gt;-->
+        <!--<strong>Copyright &copy; 2016 <a href="#">Company</a>.</strong> All rights reserved.-->
+    <!--</footer>-->
+
+    <!-- Control Sidebar -->
+    <aside class="control-sidebar control-sidebar-dark">
+        <!-- Create the tabs -->
+        <ul class="nav nav-tabs nav-justified control-sidebar-tabs">
+            <li class="active"><a href="#control-sidebar-home-tab" data-toggle="tab"><i class="fa fa-home"></i></a></li>
+            <li><a href="#control-sidebar-stats-tab" data-toggle="tab"><i class="fa fa-stumbleupon"></i></a></li>
+            <li><a href="#control-sidebar-settings-tab" data-toggle="tab"><i class="fa fa-gears"></i></a></li>
+        </ul>
+        <!-- Tab panes -->
+        <div class="tab-content">
+            <!-- Home tab content -->
+            <div class="tab-pane active" id="control-sidebar-home-tab">
+                <h3 class="control-sidebar-heading">Recent Activity</h3>
+                <ul class="control-sidebar-menu">
+                    <li>
+                        <a href="javascript:void(0)">
+                            <i class="menu-icon fa fa-birthday-cake bg-red"></i>
+
+                            <div class="menu-info">
+                                <h4 class="control-sidebar-subheading">Langdon's Birthday</h4>
+
+                                <p>Will be 23 on April 24th</p>
+                            </div>
+                        </a>
+                    </li>
+                </ul>
+                <!-- /.control-sidebar-menu -->
+
+                <h3 class="control-sidebar-heading">Tasks Progress</h3>
+                <ul class="control-sidebar-menu">
+                    <li>
+                        <a href="javascript:void(0)">
+                            <h4 class="control-sidebar-subheading">
+                                Custom Template Design
+                                <span class="pull-right-container">
+                    <span class="label label-danger pull-right">70%</span>
+                  </span>
+                            </h4>
+
+                            <div class="progress progress-xxs">
+                                <div class="progress-bar progress-bar-danger" style="width: 70%"></div>
+                            </div>
+                        </a>
+                    </li>
+                </ul>
+                <!-- /.control-sidebar-menu -->
+
+            </div>
+            <!-- /.tab-pane -->
+            <!-- Stats tab content -->
+            <div class="tab-pane" id="control-sidebar-stats-tab">
+                <header>Stats Tab Content</header>
+                <small>go go go,rocking roll!</small>
+            </div>
+            <!-- /.tab-pane -->
+            <!-- Settings tab content -->
+            <div class="tab-pane" id="control-sidebar-settings-tab">
+                <form method="post">
+                    <h3 class="control-sidebar-heading">General Settings</h3>
+
+                    <div class="form-group">
+                        <label class="control-sidebar-subheading">
+                            Report panel usage
+                            <input type="checkbox" class="pull-right" checked>
+                        </label>
+
+                        <p>
+                            Some information about this general settings option
+                        </p>
+                    </div>
+                    <!-- /.form-group -->
+                </form>
+            </div>
+            <!-- /.tab-pane -->
+        </div>
+    </aside>
+    <!-- /.control-sidebar -->
+    <!-- Add the sidebar's background. This div must be placed
+    immediately after the control sidebar -->
+    <div class="control-sidebar-bg"></div>
+</div>
+<!-- ./wrapper -->
+
+<!-- REQUIRED JS SCRIPTS -->
+
+
+<script>
+
+    $("#container").tabs({
+        data: [
+            {
+            id: 'welcome',
+            text: 'Api-Doc',
+            url: ""
+        }],
+        showIndex: 0,
+        loadAll: false
+    });
+
+    $(function () {
+        var paraminfo= getUrlParam('packagename');
+        console.log(paraminfo);
+        $.get("/apidoc/modules?packageName="+paraminfo, function(result){
+            console.log(result);
+
+            if(result != undefined){
+                $.each(result,function (index,value) {
+                    //var htmlcontent = "<li class='treeview' id=" +value.id+"><a href='#'><i class='fa fa-link'></i><span>"+value.name+"</span><span class='pull-right-container'><i class='fa fa-angle-left pull-right'></i></span></a><ul class='treeview-menu'>";
+
+                    $(".sidebar-menu").append('<li class="treeview" id=' +value.id+'><a href="#"><i class="fa fa-link"></i><span>'+value.name+'</span><span class="pull-right-container"><i class="fa fa-angle-left pull-right"></i></span></a></li>');
+                    $.get("/apidoc/actions/"+value.id, function(res){
+                        console.log(res);
+                        if(res != undefined){
+                            //$("#"+value.id).append('<ul class="treeview-menu" id='+value.classList+'></ul>');
+                            var manuIdStr = value.classList.replace(/./g,'-');
+                            $("#"+value.id).append('<ul class="treeview-menu" id='+manuIdStr+'></ul>');
+                            console.log($("#"+value.classList));
+                            $.each(res,function (index2,value2) {
+                                console.log(value2);
+//                                $("#"+value.order).append('<li><a href="javascript:void(0)" class="myLeftMenu" data-id='+value2.id+' name='+value2.methodUUID+' data="info.html">'+value2.name+'</a></li>');
+                                $("#"+manuIdStr).append('<li onclick="manuClick('+value2.id+',\''+value2.methodUUID+'\')" mid="'+value2.methodUUID+'"><a href="javascript:void(0)" class="myLeftMenu" aid="'+value2.id+'"  data="info.html">'+value2.name+'</a></li>');
+                            });
+                        }
+                    });
+                });
+            }
+        });
+
+        $('ul.sidebar-menu li').click(function () {
+            alert('li');
+            var li = $('ul.sidebar-menu li.active');
+            li.removeClass('active');
+            $(this).addClass('active');
+        });
+    })
+
+    function manuClick(id,uid) {
+        $.get("/apidoc/detail/"+id+"/"+uid, function(res){
+            console.log(res);
+            if(res != undefined){
+                $('#apidesc').html(res.description);
+                $('#apiurl').html(res.requestMethod);
+
+                if(res.requestExample != undefined || res.requestExample != null){
+                    $('#reqparams').html(res.requestExample);
+                }
+                if(res.responseExample != undefined || res.responseExample != null){
+                    $('#resparams').html(res.responseExample);
+                }
+
+                $('#apiparam').empty();
+                if(res.requestParam != undefined && res.requestParam.params != undefined){
+                    $.each(res.requestParam.params,function (index,value) {
+                        bindParamTable(value,"");
+                    });
+                }
+
+                $('#apireturn').empty();
+                if(res.responseParam != undefined && res.responseParam.params != undefined){
+                    $.each(res.responseParam.params,function (index,value) {
+                        bindReturnTable(value,"");
+                    });
+                }
+            }
+        });
+    }
+
+    function bindParamTable(value,spaceStr) {
+        $('#apiparam').append('<tr><td>'+spaceStr+value.name+'</td><td>'+value.dataType+'</td><td>否</td><td>'+value.description+'</td></tr>');
+        //console.log(value);
+        if(value != undefined && value.list != undefined && value.list.length >0){
+            for(var i=0;i<value.list.length;i++){
+                bindParamTable(value.list[i],spaceStr+"&nbsp;&nbsp;&nbsp;&nbsp;");
+            }
+        }
+        else{
+            return 1;
+        }
+    }
+
+    function bindReturnTable(value,spaceStr) {
+        $('#apireturn').append('<tr><td>'+spaceStr+value.name+'</td><td>'+value.dataType+'</td><td>否</td><td>'+value.description+'</td></tr>');
+        //console.log(value);
+        if(value != undefined && value.list != undefined && value.list.length >0){
+            for(var i=0;i<value.list.length;i++){
+                bindReturnTable(value.list[i],spaceStr+"&nbsp;&nbsp;&nbsp;&nbsp;");
+            }
+        }
+        else{
+            return 1;
+        }
+    }
+
+    
+    function getUrlParam(name) {
+        var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)"); //构造一个含有目标参数的正则表达式对象
+        var r = window.location.search.substr(1).match(reg);  //匹配目标参数
+        if (r != null) return unescape(r[2]); return null; //返回参数值
+    }
+</script>
+
+<!-- Optionally, you can add Slimscroll and FastClick plugins.
+     Both of these plugins are recommended to enhance the
+     user experience. -->
+</body>
+</html>
