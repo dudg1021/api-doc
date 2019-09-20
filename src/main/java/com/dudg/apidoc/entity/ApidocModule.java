@@ -4,12 +4,7 @@ import java.io.Serializable;
 import java.util.Objects;
 
 /**
- * <p>
  * 文档模块信息
- * </p>
- *
- * @author 此代码为自动生成
- * @since 2018-09-13
  */
 public class ApidocModule implements Serializable{
 
@@ -28,7 +23,7 @@ public class ApidocModule implements Serializable{
      */
     private long order;
     /**
-     * 包名，区分不用的文档
+     * 包名，区分不同的文档
      */
     private String packageName;
     /**

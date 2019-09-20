@@ -3,12 +3,7 @@ package com.dudg.apidoc.entity;
 import java.io.Serializable;
 
 /**
- * <p>
  * 文件基本信息
- * </p>
- *
- * @author 此代码为自动生成
- * @since 2018-09-11
  */
 public class ApidocInfo implements Serializable{
 

@@ -1,15 +1,11 @@
 package com.dudg.apidoc.entity;
 
 import java.io.Serializable;
+import java.util.Map;
 import java.util.Objects;
 
 /**
- * <p>
  * 文档接口信息
- * </p>
- *
- * @author 此代码为自动生成
- * @since 2018-09-14
  */
 public class ApidocAction implements Serializable{
 
@@ -56,6 +52,10 @@ public class ApidocAction implements Serializable{
      */
     private String responseDescription;
 
+    /**
+     * 参数描述
+     */
+    private Map<String,String> paramMap;
 
     public Integer getId() {
         return id;
@@ -127,6 +127,14 @@ public class ApidocAction implements Serializable{
 
     public void setResponseDescription(String responseDescription) {
         this.responseDescription = responseDescription;
+    }
+
+    public Map<String, String> getParamMap() {
+        return paramMap;
+    }
+
+    public void setParamMap(Map<String, String> paramMap) {
+        this.paramMap = paramMap;
     }
 
     @Override

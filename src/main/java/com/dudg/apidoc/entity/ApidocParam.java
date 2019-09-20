@@ -4,12 +4,7 @@ import java.io.Serializable;
 import java.util.List;
 
 /**
- * <p>
  * 文档参数信息
- * </p>
- *
- * @author 此代码为自动生成
- * @since 2018-09-15
  */
 public class ApidocParam implements Serializable{
 

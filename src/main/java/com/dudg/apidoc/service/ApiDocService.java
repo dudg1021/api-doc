@@ -1,5 +1,6 @@
 package com.dudg.apidoc.service;
 
+import cn.hutool.core.map.MapUtil;
 import cn.hutool.core.util.ReflectUtil;
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
@@ -96,7 +97,7 @@ public class ApiDocService {
                 String name = (api ==null || StringUtils.isEmpty(api.value())) ? claszz.getName():api.value();
                 String className = claszz.getName();
                 //判断数据库是否已经存在
-                ApidocModule apidocModule = LocalData.moduleMap_Name.get(packageName);
+                ApidocModule apidocModule = LocalData.moduleMap_Name.get(className);
                 //模块已存在时，判断class是否已经存在模块信息中
                 if (apidocModule != null) {
                     String classListStr = apidocModule.getClassList();
@@ -114,7 +115,7 @@ public class ApiDocService {
 
                 //添加到返回集合
                 modules4front.add(apidocModule);
-                moduleMap.put(apidocModule.getPackageName(), apidocModule);
+                moduleMap.put(className, apidocModule);
                 LocalData.moduleMap_Id.put(apidocModule.getId(),apidocModule);
             }
         }
@@ -203,6 +204,7 @@ public class ApiDocService {
                                 if(desc != null){
                                     action.setDescription(desc.getDescription());
                                     action.setApiDefine(desc.getApiDefine());
+                                    action.setParamMap(desc.getParamMap());
                                 }
 
                                 //存储
@@ -284,12 +286,6 @@ public class ApiDocService {
                         detail.setRequestExample(buildParams(paramListByActionId.get(0),"").replace(",@",""));
                     }
 
-//                    tmpss = "";
-//                    paramListByActionId = getParamListByActionId(id, true);
-//                    if(!CollectionUtils.isEmpty(paramListByActionId)) {
-//                        detail.setResponseExample(buildParams(paramListByActionId.get(0), ""));
-//                    }
-
                     //取返回参数实例结构
                     detail.setResponseExample(OutPutReturnParamToJson(method));
 
@@ -297,7 +293,7 @@ public class ApiDocService {
                 }
             }
         }
-        return null;
+       return null;
     }
 
     String tmpss = "";
@@ -371,6 +367,9 @@ public class ApiDocService {
     }
 
     private String emptyClassToJson(String className){
+        if(className.equalsIgnoreCase("void")){
+            return "";
+        }
         Class aClass = getClassByName(className);
         String result = "";
         if(aClass != null) {
@@ -417,15 +416,23 @@ public class ApiDocService {
     */
     private Params getParams(Integer id, Method method) {
         String type = getType(method);
-        String description = LocalData.actionMap_Id.get(id).getRequestDescription();
+        ApidocAction action = LocalData.actionMap_Id.get(id);
         List<ApidocParam> apidocParams = getParams(method, id);
+        //设置方法形参描述
+        if(MapUtil.isNotEmpty(action.getParamMap())){
+            apidocParams.stream().filter(item-> item.getPid().intValue() == 0).forEach(item ->{
+                if(action.getParamMap().containsKey(item.getName())){
+                    item.setDescription(action.getParamMap().getOrDefault(item.getName(),item.getName()));
+                }
+            });
+        }
         System.err.println("转化前的请求参数： " + JSON.toJSONString(apidocParams));
         List<ApidocParam> apidocParamList = list2Tree(apidocParams);
         System.err.println("转化完成的请求参数： " + JSON.toJSONString(apidocParamList));
 
         Params params = new Params();
         params.setType(type);
-        params.setDescription(description);
+        params.setDescription(action.getRequestDescription());
         params.setParams(apidocParamList);
         return params;
     }

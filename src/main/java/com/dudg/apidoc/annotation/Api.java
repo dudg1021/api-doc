@@ -7,10 +7,8 @@ import java.lang.annotation.RetentionPolicy;
 import java.lang.annotation.Target;
 
 /**
- * @Description: 功能模块信息
- * <p>
+ * 功能模块信息
  * 该注解作用于类/接口上，表明该类代表的功能模块的信息
- * </p>
  * 示例：@Api(name = "测试功能模块")
  */
 @Retention(RetentionPolicy.RUNTIME)

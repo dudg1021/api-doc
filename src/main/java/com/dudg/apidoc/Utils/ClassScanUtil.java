@@ -4,7 +4,6 @@ import cn.hutool.core.util.ReUtil;
 import com.dudg.apidoc.common.Const;
 import com.dudg.apidoc.entity.ApidocAction;
 import org.springframework.util.StringUtils;
-import sun.reflect.generics.reflectiveObjects.ParameterizedTypeImpl;
 
 import java.io.*;
 import java.lang.reflect.Method;
@@ -26,7 +25,6 @@ public class ClassScanUtil {
 
     /**
      * 扫描指定包路径下所有包含指定注解的类
-     *
      * @param packageName 包名
      * @param apiClass    指定的注解
      * @return Set
@@ -129,7 +127,6 @@ public class ClassScanUtil {
 
     /**
      * 查找所有的文件
-     *
      * @param dir      路径
      * @param fileList 文件集合
      */
@@ -143,23 +140,9 @@ public class ClassScanUtil {
         }
     }
 
-    /**
-     * 根据类名获得java源文件的路径
-     *
-     * @param className
-     * @return
-     */
-    private static String getClassPath(String className) {
-        String path = className.replace(".", File.separator) + ".java";
-        path = Const.codePath + path;
-        System.out.println(path);
-        return path;
-    }
-
 
     /**
      * 得到java类文件的字段和注释
-     *
      * @param className 类全名
      * @return Map
      */
@@ -176,7 +159,7 @@ public class ClassScanUtil {
         //1.行注释 //
         //2.多行注释/*  */
         //3.文档注释 /**  */
-        //文档注释可以合并为多行注释
+        //文档注释可以 合并为多行注释
         try (BufferedReader bufferedReader = new BufferedReader(
                 new InputStreamReader(getInputStream(path), Const.charSet), Const.bufferSize)
         ) {
@@ -355,6 +338,10 @@ public class ClassScanUtil {
 
     /**
      * 获得类所有public方法的注释
+     * 方法注释模板：
+     *  * @description
+     *  * @param paramName1 描述
+     *  * @param paramName2 描述
      *
      * @param className 类的全名
      */
@@ -379,20 +366,32 @@ public class ClassScanUtil {
             Map<String, ApidocAction> noteMap = new HashMap<>();
             String line;
             String desc = null;
+            Map<String,String> paramMap = new HashMap<>();
             while ((line = bufferedReader.readLine()) != null) {
-
-                System.out.println("read every line content:"+line);
-                if (line.toLowerCase().contains("@description"))
-                {
-                    if(line.toLowerCase().contains(":")){
-                        desc = line.split(":")[1].trim();
+                System.out.println(line);
+                if (line.trim().startsWith("*") && !line.trim().endsWith("*/")) {
+                    Pattern pattern = Pattern.compile("\\*\\s?@",Pattern.CASE_INSENSITIVE);
+                    Pattern patternDesc = Pattern.compile("\\*\\s?@description(：|:)?\\s?",Pattern.CASE_INSENSITIVE);
+                    Pattern patternParam = Pattern.compile("\\*\\s?@param(：|:)?\\s?",Pattern.CASE_INSENSITIVE);
+                    if ((pattern.matcher(line)).find()) {
+                        //1.匹配接口描述
+                        Matcher matcherDesc = patternDesc.matcher(line);
+                        Matcher matcherParam = patternParam.matcher(line);
+                        if (matcherDesc.find()) {
+                            desc = matcherDesc.replaceAll("").trim();
+                            System.out.println("匹配到的 描述信息："+desc);
+                        }
+                        //2.匹配参数描述
+                        else if(matcherParam.find()){
+                            String paramDesc = matcherParam.replaceAll("").trim();
+                            String[] paramKv = paramDesc.split(" ");
+                            if(paramKv.length >1){
+                                if(!paramMap.containsKey(paramKv[0].trim())){
+                                    paramMap.put(paramKv[0].trim(),paramKv[1].trim());
+                                }
+                            }
+                        }
                     }
-                    else {
-                        int index = line.indexOf("escription")+"escription".length();
-                        desc = line.substring(index).trim();
-                    }
-
-                    System.out.println("匹配到的 描述信息："+desc);
                 }
 
 
@@ -408,11 +407,6 @@ public class ClassScanUtil {
                     int num = 0;
                     if (item.getParameters() != null) {
                         for (Parameter parameter : item.getParameters()) {
-                            String type="";
-                            if(parameter.getType().getSimpleName().contains("List")){
-                                type = MessageFormat.format("List<{0}>",((Class) ((ParameterizedTypeImpl) parameter.getParameterizedType()).getActualTypeArguments()[0]).getSimpleName());
-                            }
-//                            if (tmp.contains(!StringUtils.isEmpty(type)?type:parameter.getType().getSimpleName() +" "+ parameter.getName())) {
                             if (paramStr.contains(parameter.getType().getSimpleName())) {
                                 key += parameter.getName() + "-";
                                 num++;
@@ -428,8 +422,12 @@ public class ClassScanUtil {
                         ApidocAction actionTmp = new ApidocAction();
                         actionTmp.setDescription(tmpDesc);
                         actionTmp.setApiDefine(tmp.replace("{",""));
+                        if(!paramMap.isEmpty()){
+                            actionTmp.setParamMap(FuncUtil.mapCopy(paramMap));
+                        }
                         noteMap.put(key.substring(0, key.length() - 1), actionTmp);
                         System.out.println(MessageFormat.format("function name:{0},desc:{1}",key.substring(0, key.length() - 1),tmpDesc));
+                        paramMap.clear();
                     }
                 });
             }
@@ -443,7 +441,22 @@ public class ClassScanUtil {
         }
     }
 
+    /**
+     * 根据类名获得java源文件的路径
+     * @param className
+     * @return
+     */
+    private static String getClassPath(String className) {
+        String path = className.replace(".", File.separator) + ".java";
+        path = Const.codePath + path;
+        System.out.println(path);
+        return path;
+    }
 
+    /**
+     * 根据类命获得jar路径
+     * @param className
+    */
     public static String getJarPath(String className){
         String sourceJarPath = "";
         try {
